@@ -1,0 +1,17 @@
+1-)
+	In the event loop settimeout and setImmediate has different queues. So they have different order of running.
+
+2-) 
+	We can consider the process.nextTick as a priority queue. Everything in this queue will be run immediately. It will interrupt the current tick. On the other hand; setImmediate has a queue in event loop and it will wait for its own turn.
+3-)
+	buffer
+	fs
+	http
+	path
+	os
+	module
+	events
+	stream
+	vm
+	zlib
+	
