@@ -1,0 +1,4 @@
+db.getCollection('zips').aggregate([{$match:{state:"WA"}},{$group:{_id:"$state",zip_codes:{$addToSet:"$_id"}}}])
+db.getCollection('zips').aggregate([{$match:{state:"WA",pop:{$lte:5000}}},{$group:{_id:"$state",zip_codes:{$addToSet:"$_id"}}}])
+db.getCollection('zips').aggregate([{$group:{_id:{'city':"$city",'state':"$state"},zip_codes:{$addToSet:"$_id"}}},{$match:{'zip_codes.1': {$exists: true}}},{$sort:{"city":1,"state":1}}])
+db.getCollection('zips').aggregate([{$group:{_id:{state:"$state",city:"$city"},population:{$sum:"$pop"}}},{$sort:{population:1}},{$group:{_id:"$_id.state",city:{$first:"$_id.city"},population:{$first:"$population"}}},{$sort:{"_id":-1}}])
